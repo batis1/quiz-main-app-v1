@@ -358,13 +358,13 @@ const Quiz = ({ user, reset }) => {
       <div
         ref={bombRef}
         className="Quiz "
-        style={
-          gameState !== "finished" &&
-          questions[currQuestion]?.type !== "question order" &&
-          !questions[currQuestion]?.audioUrl
-            ? { height: "55.5vh" }
-            : {}
-        }
+        // style={
+        //   gameState !== "finished" &&
+        //   questions[currQuestion]?.type !== "question order" &&
+        //   !questions[currQuestion]?.audioUrl
+        //     ? { height: "55.5vh" }
+        //     : {}
+        // }
       >
         {gameState !== "finished" ? (
           <>

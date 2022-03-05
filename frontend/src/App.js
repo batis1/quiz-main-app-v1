@@ -215,7 +215,7 @@ function App() {
 
   return (
     // <Router>
-    <div className={`app`} data-theme={theme}>
+    <div className="app" data-theme={theme}>
       <GlobalContext.Provider value={{ state, dispatch }}>
         {/* ref={myRef} */}
         <Navbar user={user} setUser={setUser} />

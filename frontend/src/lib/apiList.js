@@ -1,4 +1,4 @@
-export const server = "https://hsk4pre.herokuapp.com";
+export const server = "http://localhost:5000";
 
 const apiList = {
   signup: `${server}/user/signup`,

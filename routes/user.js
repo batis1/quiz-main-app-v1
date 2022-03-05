@@ -90,12 +90,13 @@ router.get("/:id", async (req, res) => {
   // const docs = await User.findOne({ _id: req.params.id });
 
   // console.log(docs);
+  try {
+    // res.status(404).send({});
+    const docs = await User.findOne({ _id: req.params.id });
 
-  // res.status(404).send({});
+    console.log(docs);
+    const { username, _id, avatar, email } = docs;
 
-  User.findOne({ _id: req.params.id }, (err, UserRecord) => {
-    const { username, _id, avatar, email } = UserRecord;
-    console.log(UserRecoded);
     res.send({
       username,
       _id,
@@ -103,7 +104,25 @@ router.get("/:id", async (req, res) => {
       avatar,
       // avatar: processAvatar(avatar.toString("base64")),
     });
-  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "fall",
+      message: "something went wrong to get the user",
+    });
+  }
+
+  // User.findOne({ _id: req.params.id }, (err, UserRecord) => {
+  //   const { username, _id, avatar, email } = UserRecord;
+  //   console.log(UserRecoded);
+  //   res.send({
+  //     username,
+  //     _id,
+  //     email,
+  //     avatar,
+  //     // avatar: processAvatar(avatar.toString("base64")),
+  //   });
+  // });
 });
 
 router.delete("/:id", async (req, res) => {
