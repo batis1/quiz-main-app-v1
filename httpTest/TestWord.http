@@ -1,0 +1,44 @@
+@url = http://localhost:5000/words
+@lessonUrl = http://localhost:5000/lessons
+@userUrl = http://localhost:5000/user
+
+
+POST {{lessonUrl}} 
+Content-Type: application/json
+
+{
+    "title":"Greetings 2",
+    "iconName":"grtngs",
+    "grammarsUrl":["https://immerjs.github.io/immer/"]
+}
+
+
+###
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "character":"锻炼",
+    "pinyin":"duanlian",
+    "englishTranslation":"'s",
+    "sentence":"我的猫",
+    "lessonId":"620a893de3dfc8194003fc6a"
+}
+
+###
+GET {{url}}?query=锻炼
+
+###
+
+DELETE {{lessonUrl}}/something`
+
+###
+
+PUT {{userUrl}}/61c95fec08224c1da4cbd3f3
+Content-Type: application/json
+
+{
+    "savedWords":["620a8c9527a0bb3fac3b7792","620bda275f081a43b4c64cdc"]
+}
+

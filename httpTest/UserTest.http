@@ -1,0 +1,27 @@
+@url = http://localhost:5000
+
+
+POST {{url}}/user/signup 
+Content-Type: application/json
+
+{
+    "username":"ben",
+    "email":"ben@ben.com",
+    "password":"12341234"
+}
+
+###
+
+POST {{url}}/user/login
+Content-Type: application/json
+
+{
+    "username":"ben",
+    "password":"12341234"
+}
+
+###
+
+
+# GET {{url}}/questions
+GET {{url}}/user
