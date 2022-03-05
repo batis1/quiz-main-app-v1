@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import "./Home.css";
-import clocklogo from "../../images/clocklogo.svg";
-import ProfilePicture from "../../images/ProfilePicture.jpg";
-import imageex from "../../images/imageex.svg";
+import clocklogo from "../../Images/clocklogo.svg";
+import ProfilePicture from "../../Images/ProfilePicture.jpg";
+import imageex from "../../Images/imageex.svg";
 // import hero from "../../images/hero.svg";
-import hero from "../../images/HomeHsk1.png";
+import hero from "../../Images/HomeHsk1.png";
 // import { ButtonOptions } from "../ButtonOptions/ButtonOptions";
 import { Switch } from "antd";
 import { GlobalContext } from "../../App";

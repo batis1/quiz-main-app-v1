@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./NotFound.css";
-import orangebomb from "../../images/orangebomb.svg";
+import orangebomb from "../../Images/orangebomb.svg";
 
 const NotFound = () => {
   return (
@@ -16,9 +16,7 @@ const NotFound = () => {
       <div className="not-found-text">
         <p>Sorry this page cannot be found.</p>
 
-        <Link to="/">
-          Click here to go back to homepage...
-        </Link>
+        <Link to="/">Click here to go back to homepage...</Link>
       </div>
     </div>
   );

@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import Logo from "../Logo/Logo";
 import { DropdownOptions } from "../DropdownOptions/DropdownOptions";
 import { Input } from "antd";
 import { actions, GlobalContext } from "../../App";
+import Logo from "../Logo/Logo";
 
 const { Search } = Input;
 
@@ -62,16 +62,20 @@ const Navbar = ({ user, setUser }) => {
 
   return (
     <header>
-      {isPageWide ? (
+      {/* {isPageWide ? (
         <Logo type="dark" className="logo" />
       ) : (
         <Logo type="horizontal" className="logo" />
-      )}
-
+      )} */}
+      <Logo />
       {user && pathname === "/" && (
         <div style={{ display: "flex", alignItems: "center" }}>
           <Search
-            style={{ width: "450px" }}
+            style={{
+              width: "450px",
+              marginLeft: "0.5rem",
+              marginRight: "0.5rem",
+            }}
             className="form-input"
             placeholder="search for words by hanzi..."
             value={searchInput}

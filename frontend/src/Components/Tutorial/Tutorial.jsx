@@ -1,5 +1,5 @@
 import React from "react";
-import { GlobalStyle } from "../../GlobalStyle";
+// import { GlobalStyle } from "../../GlobalStyle";
 import { SkillTree } from "./SkillTree";
 import { MainWrapper } from "./TutorialSC";
 
@@ -15,7 +15,7 @@ export const Tutorial = () => {
     >
       <MainWrapper>
         <>
-          <GlobalStyle />
+          {/* <GlobalStyle /> */}
           <SkillTree />
         </>
       </MainWrapper>

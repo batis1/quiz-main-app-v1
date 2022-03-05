@@ -5,4 +5,8 @@ export const MainWrapper = styled.div`
     text-decoration: none;
     color: #e67329;
   }
+  @media (max-width: 412px) {
+    .ant-btn {
+    }
+  }
 `;

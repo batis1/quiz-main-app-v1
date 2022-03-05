@@ -57,12 +57,18 @@ header {
 .navbar a {
   display: block;
 }
-
+/* .form-input {
+  width: "450px";
+} */
 @media (min-width: 500px) {
   header {
     padding: 3em 3em;
   }
-
+  /* .form-input {
+    width: "450px";
+    margin-left: 2rem;
+    margin-right: 2rem;
+  } */
   .navbar button {
     right: 3em;
     top: 3.5em;

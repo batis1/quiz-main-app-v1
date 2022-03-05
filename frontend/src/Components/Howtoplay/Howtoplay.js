@@ -1,9 +1,9 @@
 import React from "react";
 import "./Howtoplay.css";
-import rule1 from "../../images/rule1.svg";
-import rule2 from "../../images/rule2.svg";
-import rule3 from "../../images/rule3.svg";
-import rule4 from "../../images/rule4.svg";
+import rule1 from "../../Images/rule1.svg";
+import rule2 from "../../Images/rule2.svg";
+import rule3 from "../../Images/rule3.svg";
+import rule4 from "../../Images/rule4.svg";
 
 const Howtoplay = () => {
   return (

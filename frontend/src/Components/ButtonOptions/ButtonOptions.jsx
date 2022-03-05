@@ -53,7 +53,7 @@ export const ButtonOptions = () => {
         <Button
           className="btn homebtn white"
           style={{
-            width: "30%",
+            width: "35%",
           }}
           onClick={() => {
             dispatch({

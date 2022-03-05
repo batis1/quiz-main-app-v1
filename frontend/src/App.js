@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
 import "antd/dist/antd.css";
-import "./App.css";
+import "./Styles/App.css";
 import "./Components/Quiz/Quiz.css";
 import {
   BrowserRouter as Router,
@@ -19,7 +19,7 @@ import Quiz from "./Components/Quiz/Quiz";
 import EndScreen from "./Components/EndScreen/EndScreen";
 import Howtoplay from "./Components/Howtoplay/Howtoplay";
 import Example from "./Components/Test";
-import Upload from "./Components/TestV1";
+// import Upload from "./Components/TestV1";
 import AppUpload from "./Components/upload/AppUpload";
 import Tutor from "./Components/Tutor/Tutor";
 import TestCenter from "./Components/TestCenter/TestCenter";
@@ -28,7 +28,7 @@ import { Tutorial } from "./Components/Tutorial/Tutorial";
 import QuoteApp from "./Components/DraggableList/MainDraggable";
 import Test from "./Components/Test";
 import BIRDS from "vanta/dist/vanta.dots.min.js";
-import { WordsTable } from "./Components/WordsTable";
+import { WordsTable } from "./Components/Lesson/WordsTable";
 import Profile from "./Components/ProfileInformation/Profile";
 // import { Profile } from "./Components/Profile";
 // import Profile from "./Components/ProfileInformation/Profile";
@@ -215,11 +215,11 @@ function App() {
 
   return (
     // <Router>
-    <GlobalContext.Provider value={{ state, dispatch }}>
-      <div className={`app`} data-theme={theme}>
+    <div className={`app`} data-theme={theme}>
+      <GlobalContext.Provider value={{ state, dispatch }}>
         {/* ref={myRef} */}
         <Navbar user={user} setUser={setUser} />
-        <div
+        {/* <div
           className={`content ${
             pathname === "/quiz" ||
             pathname === "/tutor" ||
@@ -227,7 +227,8 @@ function App() {
               ? "height-auto"
               : ""
           }`}
-        >
+        > */}
+        <div className="content">
           <Switch>
             <Route exact path="/">
               <Home
@@ -288,8 +289,8 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </div>
-    </GlobalContext.Provider>
+      </GlobalContext.Provider>
+    </div>
     // </Router>
   );
 }

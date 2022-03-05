@@ -91,7 +91,9 @@ body {
   font-size: 0.8rem;
   transition: all 0.5s;  */
 }
-
+body {
+  zoom: 0.8;
+}
 h1,
 h2,
 h3,
@@ -181,7 +183,8 @@ h3 {
 
 .content {
   width: 90%;
-  height: 85vh;
+  height: 500vh;
+
   margin: 0 auto;
   padding: 2em 0;
 }

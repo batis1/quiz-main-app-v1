@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, Space, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { actions, GlobalContext } from "../App";
-import Loading from "./Loading/Loading";
+import { actions, GlobalContext } from "../../App";
+import Loading from "../Loading/Loading";
 import useLocalStorage from "use-local-storage";
 import { useHistory } from "react-router-dom";
-import apiList from "../lib/apiList";
+import apiList from "../../lib/apiList";
 
 export const WordsTable = () => {
   const [isLoading, setIsLoading] = useState(false);

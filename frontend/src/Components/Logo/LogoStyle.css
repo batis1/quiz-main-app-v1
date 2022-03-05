@@ -1,0 +1,41 @@
+.logoStyle {
+  color: var(--darkerOrange);
+  margin-left: 2.3rem;
+  margin-right: 0rem;
+
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.8rem;
+  /* padding: 1em 0 0 1em; */
+}
+
+@media (max-width: 412px) {
+  .logoStyle {
+    font-size: 1.5rem;
+    margin-left: 1.2rem;
+    margin-top: 0.8rem;
+    margin-bottom: 2rem;
+    color: var(--darkerOrange);
+  }
+}
+@media (max-width: 998px) {
+  .logoStyle {
+    font-size: 1.5rem;
+    margin-left: 1.2rem;
+    margin-top: 0.8rem;
+    margin-bottom: 2rem;
+    color: var(--darkerOrange);
+  }
+}
+
+/* @media (min-width: 1000px) {
+  html {
+    font-size: 1.125rem;
+  }
+
+  .App {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+} */

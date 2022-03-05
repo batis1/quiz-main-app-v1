@@ -12,14 +12,14 @@ import "antd/dist/antd.css";
 import { Link, useHistory } from "react-router-dom";
 import { DropdownOptions } from "./DropdownOptions/DropdownOptions";
 import { Typography, Divider, Popover, Button, Badge } from "antd";
-import { WritingSecondQ } from "./WritingSecondQ";
+import { WritingSecondQ } from "./Quiz/WritingSecondQ";
 import { Switch } from "antd";
 import { Space, Input } from "antd";
 import BIRDS from "vanta/dist/vanta.birds.min.js";
 // import { Popover, Button } from "antd";
 import { Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { WordsTable } from "./WordsTable";
+import { WordsTable } from "./Lesson/WordsTable";
 const content = (
   <div>
     <p>Content</p>

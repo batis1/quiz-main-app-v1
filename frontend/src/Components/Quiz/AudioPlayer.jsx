@@ -3,9 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import CircleControls from "react-player-circle-controls";
 import "react-player-circle-controls/dist/styles.css";
-import Loading from "./Loading/Loading";
+import Loading from "../Loading/Loading";
 import { Typography, Divider, Button } from "antd";
-
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -90,7 +89,6 @@ const AudioPlayer = ({ audioUrl, audioDescription }) => {
           <Button onClick={() => setIsOpen(!isOpen)}>show audio desc</Button>
           {isOpen && (
             <Paragraph>
-              
               <pre style={{ color: "#fff" }}>{audioDescription}</pre>
             </Paragraph>
           )}
