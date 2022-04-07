@@ -1,12 +1,85 @@
 const mongoose = require("mongoose");
+const multer = require("multer");
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { User } = require("../models/User");
 const { response } = require("express");
+const { Score } = require("../models/Score");
 const router = express.Router();
 
+// upload
+// create our customs upload (we need multerStorage and multerFilter)
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const ext = file.mimetype.split("/")[1];
+    if (file.mimetype.startsWith("image")) {
+      cb(null, "public/profile");
+    } else {
+      cb(null, "public/others");
+    }
+  },
+  // file is the file object that we consoled it
+  filename: (req, file, cb) => {
+    // user-userId-timeStamp.jpeg
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `user-${Date.now()}.${ext}`);
+  },
+});
+
+// // we use multerFilter to check if the file image or not
+// // for security propose
+// // cb(error,value you want to pass)
+const multerFilter = (req, file, cb) => {
+  console.log({ file });
+
+  const ext = file.mimetype.split("/")[1];
+  console.log(file.mimetype);
+  if (
+    file.mimetype.startsWith("image") ||
+    file.mimetype.startsWith("audio") ||
+    file.mimetype.startsWith("video")
+  ) {
+    cb(null, true);
+  } else {
+    cb(new AppError("Not image file! Please upload images", 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+const uploadUser = upload.single("file");
+
+const handleUploadUserPhoto = (req, res) => {
+  console.log(req.body);
+  const { filename } = req.file;
+
+  res.send({
+    message: "Profile image uploaded successfully",
+
+    fileName: filename,
+    filePath: `/profile/${filename}`,
+  });
+};
+
+router.post("/uploadProfileImage", uploadUser, handleUploadUserPhoto);
+
 router.get("/", async (req, res) => {
+  const { withScores } = req.query;
+
   const docs = await User.find();
+
+  if (withScores) {
+    for (let index = 0; index < docs.length; index++) {
+      const lesson = docs[index];
+
+      const wordDocs = await Score.find({ userID: lesson._id });
+
+      docs[index] = { ...lesson._doc, scores: wordDocs };
+    }
+  }
 
   res.send({ status: "success", docs });
 });
@@ -29,7 +102,9 @@ router.post("/signup", (req, res) => {
         email: req.body.email,
         password: hash,
         avatar: imgBin,
-        savedWords: req.body.username,
+        // savedWords: req.body.username,
+        imageUrl: req.body.imageUrl,
+        role: req.body.role,
       })
         .then((userRecord) => {
           res.status(200).send({
@@ -95,13 +170,14 @@ router.get("/:id", async (req, res) => {
     const docs = await User.findOne({ _id: req.params.id });
 
     console.log(docs);
-    const { username, _id, avatar, email } = docs;
+    const { username, _id, avatar, email, imageUrl } = docs;
 
     res.send({
       username,
       _id,
       email,
       avatar,
+      imageUrl,
       // avatar: processAvatar(avatar.toString("base64")),
     });
   } catch (error) {

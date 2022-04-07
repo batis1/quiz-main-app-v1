@@ -11,6 +11,7 @@ import { FormProvider } from "antd/lib/form/context";
 import AvatarUpload from "./AvatarUpload";
 import axios from "axios";
 import apiList from "../../lib/apiList";
+import AppUpload from "../Avatar/AppUpload";
 const Signup = (props) => {
   const [formStatus, setFormStatus] = useState("idle");
   const [avatarImg, setAvatarImg] = useState();
@@ -32,6 +33,7 @@ const Signup = (props) => {
       icon: <CloseCircleOutlined />,
     },
   };
+  const [imagePath, setImagePath] = useState("");
   const history = useHistory();
   useEffect(() => {
     if (props.user) {
@@ -52,6 +54,7 @@ const Signup = (props) => {
       const { data } = await axios.post(apiList.signup, {
         ...values,
         avatarImg,
+        imageUrl: imagePath,
       });
 
       if (data.success) {
@@ -75,9 +78,14 @@ const Signup = (props) => {
 
   return (
     <div className="signup-container">
+      <h1>Create an Account</h1>
+      {/* <AvatarUpload
+          avatarImg={avatarImg}
+          setImagePath={setImagePath}
+          setAvatarImg={setAvatarImg}
+        /> */}
+      <AppUpload setInput={setImagePath} input={imagePath} />
       <Form name="signup" onFinish={onFinish} layout="vertical" size="large">
-        <h1>Create an Account</h1>
-        <AvatarUpload avatarImg={avatarImg} setAvatarImg={setAvatarImg} />
         <Form.Item
           label="Username"
           name="username"

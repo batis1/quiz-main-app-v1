@@ -29,9 +29,7 @@ const Home = (props) => {
           <div className="hometitle-container">
             {/* <h1 className="hometitle">DO YOU WANT TO PRACTICE HSK 4?</h1>
              */}
-            <h1 className="hometitle">
-              Are you planning to take Chinese HSK 4 exam?
-            </h1>
+            <h1 className="hometitle">Are you planning to take Chinese HSK?</h1>
 
             {/* <p className="homesubtitle">
               Test your HSK 4 knowledge skills against the clock to climb the

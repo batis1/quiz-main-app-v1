@@ -27,6 +27,8 @@
     "react-player-circle-controls": "^0.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-webcam": "^7.0.0",
+    "semantic-ui-react": "^2.1.2",
     "styled-components": "^5.3.3",
     "use-local-storage": "^2.2.6",
     "vanta": "^0.5.21",

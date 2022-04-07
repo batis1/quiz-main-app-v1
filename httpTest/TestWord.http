@@ -1,8 +1,7 @@
 @url = http://localhost:5000/words
 @lessonUrl = http://localhost:5000/lessons
 @userUrl = http://localhost:5000/user
-
-
+@scoreUrl= http://localhost:5000/score
 POST {{lessonUrl}} 
 Content-Type: application/json
 
@@ -42,3 +41,13 @@ Content-Type: application/json
     "savedWords":["620a8c9527a0bb3fac3b7792","620bda275f081a43b4c64cdc"]
 }
 
+###
+
+GET {{scoreUrl}}/6230bf6258d5ff0016b5de0c?isAdmin=true
+
+###
+
+GET {{userUrl}}?withScores=true
+
+###
+GET http://localhost:5000/score/6230bf6258d5ff0016b5de0c?isAdmin=true

@@ -15,6 +15,10 @@ body {
 /* .dFlex, */
 /* nav,
 nav ul, */
+.tutor-link {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
 .tutor-main_content,
 .tutor-main_content .card-tutor,
 .tutor-main_content .card-tutor .card-tutor_header,

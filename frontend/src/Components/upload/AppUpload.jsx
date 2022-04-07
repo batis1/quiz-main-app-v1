@@ -1,6 +1,6 @@
 import React from "react";
 import FileUpload from "./components/FileUpload";
-import "./App.css";
+import "./AppUpload.css";
 
 const AppUpload = () => (
   <div className="container mt-4">

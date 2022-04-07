@@ -115,7 +115,7 @@ export const WordsTable = () => {
       } else if (searchInput) {
         apiUrl = `${apiUrl}?query=${searchInput}`;
       } else {
-        apiUrl = `${apiUrl}?userId=${user._id}`;
+        apiUrl = `${apiUrl}?userId=${user._id || user.id}`;
       }
 
       const {

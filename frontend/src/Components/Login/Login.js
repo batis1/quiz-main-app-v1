@@ -20,25 +20,24 @@ const Login = (props) => {
     }
   }, []);
   const onFinish = async (values) => {
-    console.log({ values });
-    setFormStatus("loading");
+    try {
+      console.log({ values });
+      setFormStatus("loading");
 
-    const { data } = await axios.post(apiList.login, values);
+      const { data } = await axios.post(apiList.login, values);
 
-    console.log({ data });
-    setFormStatus("success");
-    props.setUser(data.user);
+      console.log({ data });
+      setFormStatus("success");
+      props.setUser(data.user);
 
-    dispatch({ type: actions.SET_USER, payload: { user: data.user._doc } });
+      dispatch({ type: actions.SET_USER, payload: { user: data.user._doc } });
 
-    history.push("/");
-    if (data.auth) {
-      try {
-        window.sessionStorage.setItem("currentUser", JSON.stringify(data.user));
-      } catch {
-        console.log("session storage error");
-      }
-    } else {
+      window.sessionStorage.setItem(
+        "currentUser",
+        JSON.stringify(data.user._doc)
+      );
+      history.push("/");
+    } catch (error) {
       setFormStatus("failed");
     }
 

@@ -14,13 +14,14 @@ router.get("/", async (req, res) => {
     console.log({ user });
     const words = [];
 
-    for (let index = 0; index < user.savedWords.length; index++) {
-      const wordId = user.savedWords[index];
-      console.log({ wordId });
-      const word = await Word.findById(wordId);
+    if (user?.savedWords)
+      for (let index = 0; index < user.savedWords.length; index++) {
+        const wordId = user.savedWords[index];
+        console.log({ wordId });
+        const word = await Word.findById(wordId);
 
-      words.push(word);
-    }
+        words.push(word);
+      }
     res.send({ docs: words });
 
     return;

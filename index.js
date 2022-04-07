@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
+const fs = require("fs");
 // const { connect } = require("./db/connection");
 const questionRouter = require("./routes/questionRouter");
 const scoreRouter = require("./routes/scoreRouter");
@@ -27,12 +28,25 @@ mongoose
   .then((res) => console.log("Connected to DB"))
   .catch((err) => console.log(err));
 
+// initializing directories
+if (!fs.existsSync("./public")) {
+  fs.mkdirSync("./public");
+}
+
+if (!fs.existsSync("./public/profile")) {
+  fs.mkdirSync("./public/profile");
+}
+
+if (!fs.existsSync("./public/others")) {
+  fs.mkdirSync("./public/others");
+}
+
 // app.use(cors(["https://localhost:5000/", "https://localhost:3000/"]));
 app.use(cors());
 
 app.use(express.json());
 
-// app.use(morgan("dev"));
+app.use(morgan("dev"));
 // if (
 //   process.env.NODE_ENV === "production" ||
 //   process.env.NODE_ENV === "staging"
@@ -47,25 +61,27 @@ app.get("/", (req, res) => {
   res.send("working");
 });
 
-app.use(fileUpload());
+app.use(express.static("public"));
+// app.use(fileUpload());
+// // Upload Endpoint
+// app.post("/upload", (req, res) => {
+//   console.log(req.files);
+//   console.log(req.body);
+//   if (req.files === null) {
+//     return res.status(400).json({ msg: "No file uploaded" });
+//   }
 
-// Upload Endpoint
-app.post("/upload", (req, res) => {
-  if (req.files === null) {
-    return res.status(400).json({ msg: "No file uploaded" });
-  }
+//   const file = req.files.file;
 
-  const file = req.files.file;
+//   file.mv(`${__dirname}/public/profile${file.name}`, (err) => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).send(err);
+//     }
 
-  file.mv(`${__dirname}/frontend/public/uploads/${file.name}`, (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send(err);
-    }
-
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-  });
-});
+//     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+//   });
+// });
 
 // axios.post("/score/signup"   )
 app.use("/user", userRouter);

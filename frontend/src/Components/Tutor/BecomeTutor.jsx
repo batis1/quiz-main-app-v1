@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import "antd/dist/antd.css";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
-import { MainWrapper } from "./ProfileSC";
 import { Form, Input, Space, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import { actions, GlobalContext } from "../../App";
@@ -18,7 +17,7 @@ import useLocalStorage from "use-local-storage";
 import apiList from "../../lib/apiList";
 import AppUpload from "../Avatar/AppUpload";
 
-const Profile = () => {
+const BecomeTutor = () => {
   const [formStatus, setFormStatus] = useState("idle");
   const [avatarImg, setAvatarImg] = useState();
   const buttonValues = {
@@ -89,21 +88,8 @@ const Profile = () => {
   };
 
   return (
-    <MainWrapper>
-      <h1 className="text-center"> Update your profile</h1>
-      {/* <ImgCrop rotate>
-        <Upload
-          className="Image-container"
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          listType="picture-card"
-          fileList={[user.avatar]}
-          onChange={onChange}
-          onPreview={onPreview}
-        >
-          {fileList.length < 5 && "+ Upload"}
-        </Upload>
-      </ImgCrop> */}
-      <AppUpload />
+    <div>
+      <h1 className="text-center"> Become a Tutor</h1>
 
       <div className="signup-container">
         <Form name="signup" layout="vertical" size="large">
@@ -175,8 +161,8 @@ const Profile = () => {
           </Button>
         </Form>
       </div>
-    </MainWrapper>
+    </div>
   );
 };
 
-export default Profile;
+export default BecomeTutor;

@@ -20,6 +20,11 @@ import BIRDS from "vanta/dist/vanta.birds.min.js";
 import { Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { WordsTable } from "./Lesson/WordsTable";
+
+// import FileUploadInput from "../../l/ib/FileUploadInput";
+import FaceIcon from "@material-ui/icons/Face";
+import FileUploadInput from "../lib/FileUploadInput";
+import apiList from "../lib/apiList";
 const content = (
   <div>
     <p>Content</p>
@@ -117,6 +122,7 @@ const Test = (props) => {
     };
   }, [vantaEffect]);
 
+  const handleInput = (key, value) => {};
   return (
     // <div
     //   style={{
@@ -127,9 +133,13 @@ const Test = (props) => {
     //   }}
     // >
     <>
-      <div ref={myRef} style={{ height: "100vh" }}>
-        Foreground content goes here
-      </div>
+      <FileUploadInput
+        label="Profile Photo (.jpg/.png)"
+        icon={<FaceIcon />}
+        uploadTo={apiList.upload}
+        handleInput={handleInput}
+        identifier={"profile"}
+      />
 
       {/* <DropdownOptions options={options} />
       <SkillHeaderContainer /> */}

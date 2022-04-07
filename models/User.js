@@ -5,8 +5,10 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   avatar: Buffer,
+  imageUrl: String,
   status: { type: String, default: "active" },
   savedWords: { type: [String], ref: "Word" },
+  role: { type: String, default: "normalUser" },
 });
 
 const User = mongoose.model("Users", UserSchema);

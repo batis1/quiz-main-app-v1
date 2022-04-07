@@ -11,7 +11,7 @@ const About = () => {
       </p> */}
       <p className="app-about">
         HSK4 EXAM PRE is a platform that provides users who are planning to take
-        the HSK 4 exam with lessons and exercises, as well as a way to compete
+        the HSK exam with lessons and exercises, as well as a way to compete
         with others in their knowledge of hsk 4 questions.
       </p>
       {/* <p className="app-about">

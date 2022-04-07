@@ -4,8 +4,8 @@ export const MainWrapper = styled.div`
   border: 0 !important;
   /* margin-bottom: 30px; */
   padding: 0 0 24px;
-  margin: 0 24px 24px;
-
+  /* margin: 0 24px 24px; */
+  margin-bottom: 75rem;
   .skill-tree {
     padding-bottom: 0;
     margin-top: 70rem;

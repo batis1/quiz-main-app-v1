@@ -13,7 +13,12 @@ const FileUploadInput = (props) => {
   const [file, setFile] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
-  const handleUpload = () => {
+  const handleUpload = (e) => {
+    e.preventDefault();
+
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+
     console.log(file);
     const data = new FormData();
     data.append("file", file);
@@ -95,8 +100,9 @@ const FileUploadInput = (props) => {
             variant="contained"
             color="secondary"
             style={{ width: "100%", height: "100%" }}
-            onClick={() => handleUpload()}
+            onClick={(e) => handleUpload(e)}
             disabled={file ? false : true}
+            // type={"button"}
           >
             <CloudUpload />
           </Button>

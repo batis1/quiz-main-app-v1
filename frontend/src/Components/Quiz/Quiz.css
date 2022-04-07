@@ -87,6 +87,10 @@ p.difficulty.hard {
   text-align: center;
   font-weight: 900;
   margin: auto;
+  margin: 2rem;
+  /* margin-right: 3rem; */
+  /* margin-right: 3rem; */
+
   color: var(--lightAccent);
   overflow: hidden;
 }

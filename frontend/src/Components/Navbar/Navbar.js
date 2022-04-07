@@ -72,9 +72,9 @@ const Navbar = ({ user, setUser }) => {
         <div style={{ display: "flex", alignItems: "center" }}>
           <Search
             style={{
-              width: "450px",
-              marginLeft: "0.5rem",
-              marginRight: "0.5rem",
+              width: "430px",
+              marginLeft: "0.2rem",
+              marginRight: "0.3rem",
             }}
             className="form-input"
             placeholder="search for words by hanzi..."
@@ -164,6 +164,14 @@ const Navbar = ({ user, setUser }) => {
             Tutor
           </NavLink>
           <NavLink
+            to="/hskOcR"
+            className="navbar-item"
+            activeClassName="navbar-selected"
+            onClick={closeMenu}
+          >
+            HSK OCR
+          </NavLink>
+          <NavLink
             to="/about"
             className="navbar-item"
             activeClassName="navbar-selected"
@@ -172,14 +180,6 @@ const Navbar = ({ user, setUser }) => {
             About
           </NavLink>
 
-          {/* <NavLink
-            to="/howtoplay"
-            className="navbar-item"
-            activeClassName="navbar-selected"
-            onClick={closeMenu}
-          >
-            tutorial
-          </NavLink> */}
           <NavLink
             to="/howtoplay"
             className="navbar-item"

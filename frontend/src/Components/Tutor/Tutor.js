@@ -4,6 +4,7 @@ import "./Tutor.css";
 import ImgCart from "./imagesTest/profile-picture.jpg";
 import { Input } from "antd";
 import Loading from "../Loading/Loading";
+import { Link } from "react-router-dom";
 // import { ThumbDown } from "@mui/icons-material";
 
 const Tutor = () => {
@@ -30,6 +31,12 @@ const Tutor = () => {
     <Loading></Loading>
   ) : (
     <div className="tutor-container">
+      <div className="tutor-link">
+        <Link to="/becomeTutor">
+          <span>Do you want to become a tutor?</span>
+        </Link>
+      </div>
+
       <Input className="form-input" placeholder="search for tutor by name..." />
       <div className="tutor-main_content">
         {/* <h3>Headphones</h3> */}

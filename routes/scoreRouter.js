@@ -5,11 +5,30 @@ const { Score } = require("../models/Score");
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  if (req.query.isAdmin)
+    Score.find({}, (err, docs) => {
+      res.send({
+        docs: docs.map((doc, index) => {
+          doc.index = index;
+          return doc;
+        }),
+
+        resultLength: docs.length,
+      });
+    })
+      .sort({ score: -1 })
+      .catch((err) => {
+        console.log("There was an error", err);
+        res.status(500).send(err);
+      });
+
   Score.find({}, (err, docs) => {
-    res.send(docs.map((doc, index) => {
-      doc.index = index
-      return doc
-    }));
+    res.send(
+      docs.map((doc, index) => {
+        doc.index = index;
+        return doc;
+      })
+    );
   })
     .sort({ score: -1 })
     .limit(10)
@@ -20,6 +39,18 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:userID", (req, res) => {
+  if (req.query.isAdmin) {
+    Score.find({ userID: req.params.userID }, (err, docs) => {
+      res.send({ docs });
+    })
+      .sort({ score: -1 })
+      .catch((err) => {
+        console.log("There was an error", err);
+        res.status(500).send(err);
+      });
+    return;
+  }
+
   Score.find({ userID: req.params.userID }, (err, docs) => {
     res.send(docs);
   })

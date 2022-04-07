@@ -49,7 +49,7 @@ font-family: 'Roboto Mono', monospace; - for bomb countdown
 }
 /*----- Global Styles -----*/
 .ant-btn-primary {
-  background: var(--greyAccent);
+  background: var(--darkerOrange);
   /* border-color: #yourColor; */
 }
 
@@ -259,6 +259,9 @@ form p {
 
 form .btn {
   margin-top: 1em;
+}
+.custom-file-input {
+  width: 2rem;
 }
 /* .ant-btn:not([disabled]):hover {
   text-decoration: none;

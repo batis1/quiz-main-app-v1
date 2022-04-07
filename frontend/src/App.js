@@ -30,6 +30,10 @@ import Test from "./Components/Test";
 import BIRDS from "vanta/dist/vanta.dots.min.js";
 import { WordsTable } from "./Components/Lesson/WordsTable";
 import Profile from "./Components/ProfileInformation/Profile";
+import HksOcr from "./Components/HSKOcr/HksOcr";
+import BecomeTutor from "./Components/Tutor/BecomeTutor";
+// import BecomeTutor from "./Components/Tutor/BecomeTutor";
+
 // import { Profile } from "./Components/Profile";
 // import Profile from "./Components/ProfileInformation/Profile";
 export const GlobalContext = React.createContext();
@@ -82,6 +86,7 @@ const reducer = (
 
     case actions.SET_USER:
       return { ...state, user };
+
     case actions.UPDATE_USER:
       const newUser = state.user;
 
@@ -115,10 +120,13 @@ function App() {
         console.log({ valid });
         console.log("CURRENT USER AUTHD", currentUser);
         if (valid) {
-          console.log("setting current user");
           setUser(currentUser);
-          dispatch({ type: actions.SET_USER, payload: { user: currentUser } });
+          dispatch({
+            type: actions.SET_USER,
+            payload: { user: currentUser._doc },
+          });
         } else {
+          console.log("setting current user");
           setUser(null);
           console.log("deleting user from storage");
           // window.sessionStorage.deleteItem("currentUser");
@@ -276,6 +284,16 @@ function App() {
             <Route path="/lesson">
               <WordsTable user={user} />
             </Route>
+            <Route path="/becomeTutor">
+              <BecomeTutor />
+            </Route>
+            <Route path="/hskOcR">
+              <HksOcr />
+            </Route>
+            <Route path="/test">
+              <Test />
+            </Route>
+
             <Route path="/quiz">
               <Quiz
                 key={quizKey}

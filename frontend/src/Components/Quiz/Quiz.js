@@ -20,7 +20,7 @@ import { DropdownOptions } from "../DropdownOptions/DropdownOptions";
 import { Typography, Divider, Popover, Button } from "antd";
 import QuoteApp from "../DraggableList/MainDraggable";
 import { actions, GlobalContext } from "../../App";
-import apiList from "../../lib/apiList";
+import apiList, { server } from "../../lib/apiList";
 // import { Popover, Button } from "antd";
 const { Title, Paragraph, Text } = Typography;
 
@@ -31,14 +31,14 @@ const content = (
   </div>
 );
 const time = {
-  easy: 3000,
-  medium: 5000,
-  hard: 7000,
+  Easy: 3000,
+  Medium: 5000,
+  Hard: 7000,
 };
 const points = {
-  easy: 2,
-  medium: 5,
-  hard: 10,
+  Easy: 2,
+  Medium: 5,
+  Hard: 10,
 };
 
 const optionImg = [Aellipse, Bellipse, Cellipse, Dellipse];
@@ -48,16 +48,18 @@ const Quiz = ({ user, reset }) => {
   const [optionChosen, setOptionChosen] = useState();
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState();
   const [options, setOptions] = useState();
+  // gameState options [loading, finished,  active, paused]
   const [gameState, setGameState] = useState("loading");
   const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState();
-  const [timer, setTimer] = useState(1000 * 60);
+  const [timer, setTimer] = useState(1000 * 60 * 30);
   const [timerState, setTimerState] = useState("idle");
   const [showBomb, setShowBomb] = useState(true);
   const [optionStyles, setOptionStyles] = useState([]);
   const [answerProcessed, setAnswerProcessed] = useState(true);
   const [scoreUploaded, setScoreUploaded] = useState(false);
   const [mouseClick, setMouseClick] = useState();
+  const [isOptionsProcessed, setIsOptionsProcessed] = useState(false);
   const history = useHistory();
   // const { isGame } = useParams();
   const {
@@ -101,6 +103,7 @@ const Quiz = ({ user, reset }) => {
             setGameState("active");
             setTimerState("active");
             setCurrQuestion(0);
+            // if (!answerProcessed) debugger;
             setAnswerProcessed(true);
           })
           .catch((e) => {
@@ -166,9 +169,14 @@ const Quiz = ({ user, reset }) => {
   }, [gameState, scoreUploaded]);
 
   useEffect(() => {
+    // Quiz first question only shows the correct also answer error in here
+
     console.log("in create question useEffect", { gameState, answerProcessed });
+    // if (gameState === "active") debugger;
     if (gameState !== "loading") {
-      if (answerProcessed) {
+      console.log(isOptionsProcessed);
+      if (answerProcessed && !isOptionsProcessed) {
+        setIsOptionsProcessed(true);
         setAnswerProcessed(false);
         console.log("creating question", {
           currQuestion,
@@ -180,16 +188,27 @@ const Quiz = ({ user, reset }) => {
           questions[currQuestion]?.correct_answer &&
           questions[currQuestion]?.incorrect_answers
         ) {
-          const [answers, correctIndex] = shuffleOptions(
-            questions[currQuestion]?.correct_answer,
-            questions[currQuestion]?.incorrect_answers
-          );
-          setOptions(answers);
-          setCorrectAnswerIndex(correctIndex);
+          if (questions[currQuestion]?.type === "True and False") {
+            const incorrect =
+              questions[currQuestion]?.answer === "true" ? ["false"] : ["true"];
+            const [answers, correctIndex] = shuffleOptions(
+              questions[currQuestion]?.correct_answer,
+              incorrect
+            );
+            setOptions(answers);
+            setCorrectAnswerIndex(correctIndex);
+          } else {
+            const [answers, correctIndex] = shuffleOptions(
+              questions[currQuestion]?.correct_answer,
+              questions[currQuestion]?.incorrect_answers
+            );
+            setOptions(answers);
+            setCorrectAnswerIndex(correctIndex);
+          }
         }
       }
     }
-  }, [gameState, currQuestion, answerProcessed, questions]);
+  }, [gameState, currQuestion, answerProcessed, questions, isOptionsProcessed]);
 
   useEffect(() => {
     console.log("options style useEffect", options);
@@ -237,7 +256,12 @@ const Quiz = ({ user, reset }) => {
 
   useEffect(() => {
     console.log("process answer useEffect", { gameState, optionChosen });
-    if (gameState === "active" && optionChosen !== undefined) {
+    // if (gameState === "active") debugger;
+    if (
+      gameState === "active" &&
+      optionChosen !== undefined &&
+      optionChosen !== null
+    ) {
       console.log("**********");
 
       console.log(time[questions[currQuestion].difficulty]);
@@ -260,6 +284,9 @@ const Quiz = ({ user, reset }) => {
 
       if (questions[currQuestion + 1]) setCurrQuestion(currQuestion + 1);
       else setGameState("finished");
+      console.log("here");
+      // if (!answerProcessed) debugger
+      setIsOptionsProcessed(false);
       setAnswerProcessed(true);
     }
   }, [optionChosen, gameState]);
@@ -270,6 +297,9 @@ const Quiz = ({ user, reset }) => {
     console.log("handle answer");
     setTimerState("paused");
     setGameState("paused");
+
+    // setIsOptionsProcessed(false);
+
     // highlight chosen answer
     // fade incorrect answers
     console.log("correct answer🎈🎈🎈🎈");
@@ -326,6 +356,7 @@ const Quiz = ({ user, reset }) => {
         console.log("Runnin handle answer settimeout", { answerIndex });
         console.log({ optionChosen });
         setOptionChosen(answerIndex);
+
         setTimerState("active");
         setGameState("active");
       },
@@ -417,7 +448,7 @@ const Quiz = ({ user, reset }) => {
             </div>
             {questions[currQuestion]?.audioUrl && (
               <AudioPlayer
-                audioUrl={questions[currQuestion]?.audioUrl}
+                audioUrl={`${server}/${questions[currQuestion]?.audioUrl}`}
                 audioDescription={questions[currQuestion]?.audioDescription}
               />
             )}
@@ -431,15 +462,16 @@ const Quiz = ({ user, reset }) => {
               />
             )}
             {optionsDropdown[optionIndex].value === "Writing" ? (
-              <QuoteApp
-                question={questions[currQuestion]?.question}
-                correct_answer={questions[currQuestion]?.correct_answer}
-                setCurrQuestion={setCurrQuestion}
-                currQuestion={currQuestion}
-                setGameState={setGameState}
-                questions={questions}
-                handleAnswer={handleAnswer}
-              />
+              // <QuoteApp
+              //   question={questions[currQuestion]?.question}
+              //   correct_answer={questions[currQuestion]?.correct_answer}
+              //   setCurrQuestion={setCurrQuestion}
+              //   currQuestion={currQuestion}
+              //   setGameState={setGameState}
+              //   questions={questions}
+              //   handleAnswer={handleAnswer}
+              // />
+              <div></div>
             ) : (
               <div className="options">
                 {options &&
