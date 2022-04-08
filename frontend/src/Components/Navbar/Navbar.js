@@ -219,6 +219,10 @@ const Navbar = ({ user, setUser }) => {
                 closeMenu();
                 setUser(null);
                 sessionStorage.clear();
+                dispatch({
+                  type: actions.SET_USER,
+                  payload: { user: null },
+                });
               }}
             >
               Log Out

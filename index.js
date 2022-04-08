@@ -9,6 +9,7 @@ const scoreRouter = require("./routes/scoreRouter");
 const userRouter = require("./routes/user");
 const wordRouter = require("./routes/wordRoute");
 const lessonRouter = require("./routes/lessonsRoute");
+const tutorRouter = require("./routes/TutorRouter");
 
 const path = require("path");
 const morgan = require("morgan");
@@ -89,6 +90,7 @@ app.use("/score", scoreRouter);
 app.use("/questions", questionRouter);
 app.use("/words", wordRouter);
 app.use("/lessons", lessonRouter);
+app.use("/tutors", tutorRouter);
 
 const PORT = process.env.PORT || 5000;
 // const PORT = 5000;

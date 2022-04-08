@@ -22,18 +22,18 @@ const BecomeTutor = () => {
   const [avatarImg, setAvatarImg] = useState();
   const buttonValues = {
     idle: {
-      text: "Update Account",
+      text: "Become A tutor",
       loading: false,
       icon: <PlusCircleOutlined />,
     },
     loading: { text: "Updating Account", loading: true, icon: null },
     success: {
-      text: "Account Updated",
+      text: "Waiting for the Admin",
       loading: false,
       icon: <CheckCircleOutlined />,
     },
     failed: {
-      text: "Account Updated Failed",
+      text: "Failed to become a tutor",
       loading: false,
       icon: <CloseCircleOutlined />,
     },
@@ -70,22 +70,31 @@ const BecomeTutor = () => {
     dispatch,
   } = useContext(GlobalContext);
 
-  const [userInfo, setUserInfo] = useState({
-    username: user.username,
-    email: user.email,
-  });
+  const [userInfo, setUserInfo] = useState({});
 
   const history = useHistory();
 
   console.log({ user });
 
   const handleUpdate = async () => {
-    const { data } = await axios.put(`${apiList.user}/${user._id}`, {
-      ...userInfo,
-    });
+    try {
+      const { data } = await axios.post(`${apiList.tutor}`, {
+        ...userInfo,
+        status: "applied",
+        userId: user._id,
+      });
 
-    console.log({ data });
+      history.push("/tutor");
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    if (!user) {
+      history.push("/login");
+    }
+  }, []);
 
   return (
     <div>
@@ -94,46 +103,139 @@ const BecomeTutor = () => {
       <div className="signup-container">
         <Form name="signup" layout="vertical" size="large">
           <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: "Please input a username." }]}
+            label="HSK Level"
+            name="HSK"
+            rules={[{ required: true, message: "Please input HSk Level." }]}
           >
             <Input
-              defaultValue={userInfo.username}
+              // defaultValue={userInfo.username}
               className="form-input"
-              placeholder="Enter a username"
+              placeholder="Enter a HSk Level"
               onChange={(e) =>
                 setUserInfo((oldUserInfo) => ({
                   ...oldUserInfo,
-                  username: e.target.value,
+                  hskLevel: e.target.value,
                 }))
               }
             />
           </Form.Item>
           <Form.Item
-            label="Email Address"
-            name="email"
+            label="Educational background"
+            name="Educational"
             rules={[
               {
                 required: true,
-                message: "A valid email address is required to signup.",
+                message: "A valid Info is required to become a tutor.",
               },
             ]}
           >
             <Input
-              defaultValue={user.email}
+              // defaultValue={user.email}
               className="form-input"
-              placeholder="Enter an email address"
+              placeholder="Enter your Educational background"
               onChange={(e) =>
                 setUserInfo((oldUserInfo) => ({
                   ...oldUserInfo,
-                  email: e.target.value,
+                  educationalBackground: e.target.value,
                 }))
               }
               //   value={user.email}
             />
           </Form.Item>
-          <Form.Item label="Password" name="password" rules={[{}]}>
+          <Form.Item
+            label="Teaching period"
+            name="duration"
+            rules={[
+              {
+                required: true,
+                message: "A valid Info is required to become a tutor.",
+              },
+            ]}
+          >
+            <Input
+              // defaultValue={user.email}
+              className="form-input"
+              placeholder="Enter your teaching duration "
+              onChange={(e) =>
+                setUserInfo((oldUserInfo) => ({
+                  ...oldUserInfo,
+                  teachingPeriod: e.target.value,
+                }))
+              }
+              //   value={user.email}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Teaching time"
+            // name="duration"
+            rules={[
+              {
+                required: true,
+                message: "A valid Info is required to become a tutor.",
+              },
+            ]}
+          >
+            <Input
+              // defaultValue={user.email}
+              className="form-input"
+              placeholder="Enter your teaching time"
+              onChange={(e) =>
+                setUserInfo((oldUserInfo) => ({
+                  ...oldUserInfo,
+                  teachingTime: e.target.value,
+                }))
+              }
+              value={userInfo.teachingTime}
+            />
+          </Form.Item>
+          <Form.Item
+            label="More Info"
+            name="more"
+            rules={[
+              {
+                required: true,
+                message: "A valid Info is required to become a tutor.",
+              },
+            ]}
+          >
+            <Input
+              // defaultValue={user.email}
+              className="form-input"
+              placeholder="Enter more Info .."
+              onChange={(e) =>
+                setUserInfo((oldUserInfo) => ({
+                  ...oldUserInfo,
+                  moreInfo: e.target.value,
+                }))
+              }
+              //   value={user.email}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Zoom's room ID"
+            name="zoom"
+            rules={[
+              {
+                required: true,
+                message: "A valid Info is required to become a tutor.",
+              },
+            ]}
+          >
+            <Input
+              // defaultValue={user.email}
+              className="form-input"
+              placeholder="Enter your zoom's meeting room ID"
+              onChange={(e) =>
+                setUserInfo((oldUserInfo) => ({
+                  ...oldUserInfo,
+                  zoomRoomID: e.target.value,
+                }))
+              }
+              //   value={user.email}
+            />
+          </Form.Item>
+
+          {/* <Form.Item label="Password" name="password" rules={[{}]}>
             <Input.Password
               className="form-input"
               placeholder="Enter a password"
@@ -148,7 +250,7 @@ const BecomeTutor = () => {
               className="form-input"
               placeholder="Re-enter your password"
             />
-          </Form.Item>
+          </Form.Item> */}
           <Button
             htmlType="submit"
             type="primary"

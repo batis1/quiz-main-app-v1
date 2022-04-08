@@ -2,6 +2,8 @@
 @lessonUrl = http://localhost:5000/lessons
 @userUrl = http://localhost:5000/user
 @scoreUrl= http://localhost:5000/score
+
+@turoUrl= http://localhost:5000/tutors
 POST {{lessonUrl}} 
 Content-Type: application/json
 
@@ -51,3 +53,37 @@ GET {{userUrl}}?withScores=true
 
 ###
 GET http://localhost:5000/score/6230bf6258d5ff0016b5de0c?isAdmin=true
+
+###
+POST {{turoUrl}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "hskLevel":"hsk4",
+    "educationalBackground":"mastrs in chinse language",
+    "teachingPeriod":"summer",
+    "teachingTime":"7:00pm - 8:00pm",
+    "userId":"624ca8081d467539482b60a0",
+    "zoomRoomID":"some620a893de3dfc8194003fc6a"
+}
+
+
+###
+PUT {{turoUrl}}/624f3aef25654c171c862a93 HTTP/1.1
+Content-Type: application/json
+
+{
+    "hskLevel":"hsk5"
+}
+
+
+###
+
+###
+DELETE  {{turoUrl}}/624f2c6791e55a43e03b18ad HTTP/1.1
+###
+GET  {{turoUrl}}?status=applied
+###
+GET  {{turoUrl}}/624f3aef25654c171c862a93 HTTP/1.1
+###
+
